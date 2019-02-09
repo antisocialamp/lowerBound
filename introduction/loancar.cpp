@@ -1,36 +1,62 @@
+// Problem: U-Va 10114 - Loansome Car Buyer
+
 #include <cstdio>
 
-int main(){
-	// Input: 1st Line : 	int loanDur (loan duration in months)
-	// 			double payment (buyers monthly payment)
-	// 			double loanVal ( loan value )
-	// 			int nofRecs ( number of records that follow )
-	int loanDur, nofRecs;
-	double payment, loanVal, carVal; // carVal will be set equal to loan val upon initializationand then used for comparison purposes.
-	
-	// Other variables that need to be declared here to avoid runtime errors:
-	// int month ( passive variable to check whether a month is missing)
-	// double depRate ( rate in which car value declines (montly))
+struct record{
 	int month;
-	double depRate;	
+	double deprecation;
+};
 
+int main () {
+	// Input will contain multiple test cases:
+	// input style: duration downPayment loan recordN (recordN stands for record number)
+	// 		record lines below describing deprecation
 	
-	// The input will contain multiple loans (test cases)
-	while ( scanf ("%d %lf %lf %d", &loanDur, &payment, &loanVal, &nofRecs) == 4 ){
-		carVal = loanVal;
-		for ( int l = 0; l < loanDur; l++ ){
-			scanf ( "%d", &month);
-			if ( month == l )
-				scanf ("%lf", &depRate);
-			carVal -= carVal * depRate;
-			loanVal -= payment;
-			// Asked to print the number of months before the borrower owes less than car's worth
-			if ( carVal < loanVal ){
-			 	if ( (month-1) == 1)
-					printf ("1 month\n");
-				else
-					printf ("%d months\n", month--);
-			}
+	int duration,
+	    recordN,
+	    currentMonth,
+	    resultIndic;
+
+	double downPayment,
+	       monthlyPayment,
+	       loan,
+	       carValue,
+	       tempDep;
+
+	while ( scanf("%d %lf %lf %d", &duration, &downPayment, &loan, &recordN) == 4 ){
+		if ( duration <= 0 ) return 0;
+
+		// At first collecting input in a record array:
+		record records[recordN];
+		carValue = loan + downPayment;
+		monthlyPayment = loan / duration;
+
+		for ( int l = 0; l < recordN; l++ )
+			scanf ("%d %lf", &records[l].month, &records[l].deprecation);
+			
+		// Input collection finished.
+		currentMonth = 1;
+		resultIndic = 0;
+		
+		carValue -= carValue * records[resultIndic].deprecation;
+
+		while ( loan > carValue ){
+			loan -= monthlyPayment;
+
+			if ( currentMonth == records[resultIndic+1].month )
+				resultIndic++;
+
+			carValue -= (carValue * records[resultIndic].deprecation );
+
+			currentMonth++;
 		}
+
+		currentMonth--;
+
+		if ( currentMonth == 1 )
+			printf ("%d month\n", 1);
+		else
+			printf ("%d months\n", currentMonth);
+		
 	}
-}
+}	

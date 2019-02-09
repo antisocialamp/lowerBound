@@ -1,0 +1,12 @@
+#ignore all *~ files
+*~
+/*/*~
+
+#ignore all exec files
+/*/exec
+/*/input
+/*/output
+
+#ignore all swap (.swp) files
+/*/*.swp
+
