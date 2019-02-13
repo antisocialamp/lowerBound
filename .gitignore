@@ -4,9 +4,15 @@
 
 #ignore all exec files
 /*/exec
+/*/*/exec
 /*/input
+/*/*/input
 /*/output
+/*/*/output
 
 #ignore all swap (.swp) files
 /*/*.swp
+/*/~*
 
+/*/*/*.swp
+/*/*/~*
