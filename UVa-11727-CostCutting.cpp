@@ -8,7 +8,7 @@ int main(){
 	// Input specifications: first line contains integer N, number of test cases
 	// Next N lines contain 3 numbers that depict the salary of the employees
 	// Task : to print the salary with the medium value for each test case
-	
+
 	int N; // Number of test cases
 	int a,b,c; // Salaries
 	int result; // what i am gonna print
@@ -22,4 +22,5 @@ int main(){
 	}
 	return 0;
 
-	}	
+}
+
