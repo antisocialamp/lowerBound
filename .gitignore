@@ -1,18 +1,6 @@
-#ignore all *~ files
+#ignore all *~ and .swp files
 *~
-/*/*~
-
-#ignore all exec files
-/*/exec
-/*/*/exec
-/*/input
-/*/*/input
-/*/output
-/*/*/output
-
-#ignore all swap (.swp) files
-/*/*.swp
-/*/~*
-
-/*/*/*.swp
-/*/*/~*
+*.swp
+exec
+input
+output
